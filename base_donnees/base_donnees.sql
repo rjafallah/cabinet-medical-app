@@ -2,8 +2,6 @@
 -- Cabinet Médical - Script de création
 -- =============================================
 
-DROP DATABASE cabinet_medical;
-
 CREATE DATABASE IF NOT EXISTS cabinet_medical;
 USE cabinet_medical;
 
@@ -13,7 +11,7 @@ USE cabinet_medical;
 CREATE TABLE utilisateurs (
     id          INT NOT NULL AUTO_INCREMENT,
     username    VARCHAR(50) NOT NULL UNIQUE,
-    password    CHAR(255) NOT NULL,
+    password    VARCHAR(100) NOT NULL,
     enabled     TINYINT NOT NULL DEFAULT 1,
     role        VARCHAR(20) NOT NULL,
     PRIMARY KEY (id)
@@ -82,11 +80,11 @@ CREATE TABLE ordonnances (
 -- Données de test
 -- ---------------------------------------------
 INSERT INTO utilisateurs VALUES
-(1, 'admin', 'admin123', 1, 'ADMIN'),
-(2, 'docteur1', 'dr123', 1, 'MEDECIN'),
-(3, 'docteur2', 'dr123', 1, 'MEDECIN'),
-(4, 'patient1', 'test123', 1, 'PATIENT'),
-(5, 'patient2', 'test123', 1, 'PATIENT');
+(1, 'admin', '$2a$10$ZgLOwe8gG2bjOL3PRY.XkuMvHkLlnRAr5GGaImFJen2koBqM7XpHK', 1, 'ADMIN'),
+(2, 'docteur1', '$2a$10$8zJxilOwJ5fxTnS1XP5P4u0X2kEbga1NDlZVGmQFLvQ9SLUPoWAfy', 1, 'MEDECIN'),
+(3, 'docteur2', '$2a$10$8zJxilOwJ5fxTnS1XP5P4u0X2kEbga1NDlZVGmQFLvQ9SLUPoWAfy', 1, 'MEDECIN'),
+(4, 'patient1', '$2a$10$muAjehA5CW18.XYpXX8oJ.qoGQs8n4qzHRrS8WI6emUwGbRaM9ODa', 1, 'PATIENT'),
+(5, 'patient2', '$2a$10$muAjehA5CW18.XYpXX8oJ.qoGQs8n4qzHRrS8WI6emUwGbRaM9ODa', 1, 'PATIENT');
 
 INSERT INTO medecins VALUES
 (1, 'Rja-fallah', 'Yassine',   'Généraliste',  '0600000001', 'Rjafallah@cabinet.fr', 2),
