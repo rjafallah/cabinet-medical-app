@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <title>Nouveau rendez-vous</title>
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-dark bg-primary px-3">
+    <span class="navbar-brand">🏥 Cabinet Médical</span>
+    <form th:action="@{/deconnexion}" method="POST">
+        <button type="submit" class="btn btn-outline-light btn-sm">
+            Déconnexion
+        </button>
+    </form>
+</nav>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+
+                    <h4 class="card-title mb-4">
+                        ➕ Nouveau rendez-vous
+                    </h4>
+
+                    <form th:action="@{/patient/sauvegarder-rendez-vous}" th:object="${rendezVous}" method="POST">
+
+                        <div class="mb-3">
+                            <label class="form-label">Date et heure</label>
+                            <input type="datetime-local" th:field="*{dateHeure}" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Motif</label>
+                            <input type="text" th:field="*{motif}" class="form-control" placeholder="Raison de la consultation" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Médecin</label>
+                            <select name="medecin.id" class="form-select">
+                                <option value="">-- Choisir un médecin --</option>
+                                <option th:each="medecin : ${medecins}"
+                                        th:value="${medecin.id}"
+                                        th:text="${medecin.nom + ' ' + medecin.prenom + ' - ' + medecin.specialite}">
+                                </option>
+                            </select>
+                            </select>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-success">
+                                Confirmer
+                            </button>
+                            <a th:href="@{/patient/rendez-vous}" class="btn btn-secondary">
+                                Annuler
+                            </a>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

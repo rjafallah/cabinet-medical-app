@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <title>Tableau de bord Patient</title>
+</head>
+<body class="bg-light">
+
+<!-- Navbar -->
+<nav class="navbar navbar-dark bg-primary px-3">
+    <span class="navbar-brand"> Cabinet Médical</span>
+    <span class="text-white">
+        Connecté : <sec:authentication property="principal.username" />
+    </span>
+    <form th:action="@{/deconnexion}" method="POST">
+        <button type="submit" class="btn btn-outline-light btn-sm">
+            Déconnexion
+        </button>
+    </form>
+</nav>
+
+<div class="container mt-4">
+
+    <!-- Infos patient -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h4 class="card-title">
+                👤 Bienvenue,
+                <span th:text="${patient.prenom + ' ' + patient.nom}"></span>
+            </h4>
+            <p class="mb-1">
+                📞 <span th:text="${patient.telephone}"></span>
+            </p>
+            <p class="mb-0">
+                📧 <span th:text="${patient.email}"></span>
+            </p>
+        </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <h5>📅 Mes rendez-vous</h5>
+                    <a th:href="@{/patient/rendez-vous}"
+                       class="btn btn-primary mt-2">
+                        Voir
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <h5>➕ Nouveau rendez-vous</h5>
+                    <a th:href="@{/patient/nouveau-rendez-vous}"
+                       class="btn btn-success mt-2">
+                        Prendre
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <h5>👨‍⚕️ Liste des médecins</h5>
+                    <a th:href="@{/patient/liste-medecins}"
+                       class="btn btn-info mt-2">
+                        Voir
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
